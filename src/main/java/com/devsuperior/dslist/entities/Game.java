@@ -24,8 +24,12 @@ public class Game {
 	private String platforms;
 	private Double score;
 	private String imgUrl;
+	
+	@Column(columnDefinition = "TEXT")
 	private String shortDescription;
-	private String longDescription;
+	
+	@Column(columnDefinition = "TEXT") // Converte para o Tipo Texto, o que aceita + de 255 do VARCHAR
+	private String longDescription; // A JPA converte a String como VARCHAR(255)
 
 	public Game() {
 	}

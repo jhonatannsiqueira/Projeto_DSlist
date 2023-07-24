@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.dslist.dto.GameDTO;
 import com.devsuperior.dslist.dto.GameMinDTO;
 import com.devsuperior.dslist.entities.Game;
+import com.devsuperior.dslist.projections.GameMinProjection;
 import com.devsuperior.dslist.repositories.GameRepository;
 
 @Service // Registra a service como um Componente do Sistema
@@ -25,7 +26,7 @@ public class GameService {
 		return dto;
 		// readOnly = true assegura que não será realizada nenhuma operação de escrita
 	}
-
+	
 	@Transactional(readOnly = true)
 	public List<GameMinDTO> findAll() {
 		List<Game> result = gameRepository.findAll();
@@ -34,6 +35,12 @@ public class GameService {
 		// o .map é uma operação da stream() Objetos de uma coisa para outra
 		return dto;
 		// a consulta DTO customiza o formato da saída da API
+	}
+	
+	@Transactional(readOnly = true)
+	public List<GameMinDTO> findByList(Long listId) {
+		List<GameMinProjection> result = gameRepository.searchByList(listId);
+		return result.stream().map(x -> new GameMinDTO(x)).toList();
 	}
 
 }

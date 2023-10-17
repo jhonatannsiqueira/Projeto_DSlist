@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 public class Belonging { // Entidade Associativa/Pertencimento
 
 	@EmbeddedId
-	private BelongingPK id; // Classe auxiliar criada para representar uma PK Multipla
+	private BelongingPK id = new BelongingPK(); // Classe auxiliar criada para representar uma PK Multipla
 	
 	private Integer position;
 
